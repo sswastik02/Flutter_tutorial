@@ -1,0 +1,64 @@
+//https://www.youtube.com/watch?v=GLSG_Wh_YWc
+import 'package:flutter/material.dart'; // very simmilar to java
+
+void main() {
+  // Flutter is a compopnent based framework of dart here everything is a component
+  // the whole app is in a app component the visible page in a page(scaffold)
+  // component there is a navbar component, button component,etc. Each component
+  // needs to be defined like a list or a button (component = widget)
+  runApp(MyApp()); //run an app (by running a constructor of app)
+}
+
+// or void main() => runApp(myApp()) works only for one statement
+class MyApp extends StatefulWidget { // consider state as a variable it has to remember (stateful widget will remember)
+// for example user authentication
+  @override
+  State<StatefulWidget> createState() {
+    // method createState of State type belonds to StatefulWidget(no one else can use)
+
+    return _MyAppState();
+  }
+}
+
+//class MyApp extends StatelessWidget { StatelessWidget calls build if data recieved by it changes or app starts but cannot manipulate internal data(such as Card)
+//inheritence (so its a stateless widget but with our own spin to it)
+class _MyAppState extends State<MyApp> {
+  // _ means local file use (name convention)
+  List<String> _entries = ['Distro Tester'];
+  @override //it works without it but it makes it clear that override is done here
+  Widget build(BuildContext context) {
+    // it works without specifing (widget or buildcontext) but it will help ide figure out errors
+    // context defines visual elements like color, build is called by main to draw on screen
+    return MaterialApp(
+      // Material App is a class and its function is constructor
+      // so all apps have this its like a template for all apps (navigation, pages, etc.)
+
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Distro'),
+        ),
+        body: Column(
+          children: <Widget>[
+            Container(
+              // this is like div in html
+              margin: EdgeInsets.all(10.0),
+              child: ElevatedButton(
+                onPressed: () {}, // Anonymous empty function
+                child: Text('Add Entries'),
+              ),
+            ),
+            Card(
+              child: Column(
+                children: <Widget>[
+                  Image.asset(
+                      'assets/distroslist.png'), // check out pubspec.yaml
+                  Text('Linux Distros')
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
